@@ -1,0 +1,9 @@
+
+client TimeService
+  resource Time
+ 	get /time
+  end
+  resource Index
+	get /
+  end
+end

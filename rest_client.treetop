@@ -1,0 +1,64 @@
+
+grammar RestClient
+
+	rule rest_client_definition
+		client_definition*
+	end
+	
+	rule client_definition
+		client_declaration client_body end_block
+	end
+	
+	rule client_declaration
+		padding "client" [\s]+ client_name
+	end
+	
+	rule client_name
+		[A-Za-z] [A-Za-z0-9_.]+
+	end
+	
+	rule client_body
+		padding resource_definition?
+	end
+	
+	rule resource_definition
+		resource_declaration resource_body end_block
+	end
+	
+	rule resource_declaration
+		padding "resource" [\s]+ resource_name
+	end
+	
+	rule resource_name
+		[A-Za-z] [A-Za-z0-9_]+
+	end
+	
+	rule resource_body
+		padding method_definition?
+	end
+	
+	rule method_definition
+		method_verb [\s]+ endpoint_pattern
+	end
+	
+	rule method_verb
+		"get" / "post" / "put" / "delete"
+	end
+	
+	rule endpoint_pattern
+		[A-Za-z0-9._\-/]+
+	end
+	
+	rule padding
+		whitespace? 
+	end
+	
+	rule whitespace
+		[\s\t\n]*
+	end
+	
+	rule end_block
+		"end" padding?
+	end
+
+end
